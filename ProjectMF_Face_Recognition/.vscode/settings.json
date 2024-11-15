@@ -1,0 +1,14 @@
+{
+    "python.analysis.autoImportCompletions": true,
+    "cSpell.enableFiletypes": [
+        "shellscript",
+        "sql",
+        "xml"
+    ],
+    "cSpell.words": [
+        "notificationorgin",
+        "تدريبه",
+        "محدد",
+        "مسبقًا"
+    ]
+}

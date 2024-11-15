@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Receiver</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to handle the signal response and update the box
+            function handleSignal(signalValue) {
+                if (signalValue === '0') {
+                    // Change the box color to red
+                    $("#box").css("background-color", "red");
+                } else {
+                    // Change the box color to green
+                    $("#box").css("background-color", "green");
+                }
+            }
+
+            // Function to send the signal request to the server
+            function sendSignal() {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:5000/signal",  // Replace with the server address
+                    data: { signal: "0" },
+                    success: function (response) {
+                        if (response.success) {
+                            console.log(response.message);
+                            handleSignal("0");
+                        } else {
+                            console.log("Error:", response.message);
+                            handleSignal(""); // Set to empty string to restore green color
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error:", error);
+                        handleSignal(""); // Set to empty string to restore green color
+                    }
+                });
+            }
+
+            // Periodically send the signal request every 5 seconds
+            setInterval(sendSignal, 5000);
+        });
+    </script>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            /* Default color */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+
+</html>

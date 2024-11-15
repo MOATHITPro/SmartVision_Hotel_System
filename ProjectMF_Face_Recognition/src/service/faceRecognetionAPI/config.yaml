@@ -1,0 +1,4 @@
+# config.yaml 
+server: 
+  ip:  192.168.43.75 
+  port: 5000
